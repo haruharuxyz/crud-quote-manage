@@ -1,0 +1,55 @@
+type Author = record {
+  id : text;
+  birthYear : nat64;
+  name : text;
+  createdAt : nat64;
+  updatedAt : opt nat64;
+};
+type AuthorPayload = record { birthYear : nat64; name : text };
+type Collector = record {
+  id : text;
+  "principal" : principal;
+  createdAt : nat64;
+  collectorName : text;
+  updatedAt : opt nat64;
+};
+type CollectorPayload = record { collectorName : text };
+type Quote = record {
+  id : text;
+  content : text;
+  authorId : text;
+  createdAt : nat64;
+  collectorId : text;
+  updatedAt : opt nat64;
+  collector : principal;
+};
+type QuotePayload = record {
+  content : text;
+  authorId : text;
+  collectorId : text;
+};
+type _AzleResult = variant { Ok : Author; Err : text };
+type _AzleResult_1 = variant { Ok : text; Err : text };
+type _AzleResult_2 = variant { Ok : vec Author; Err : text };
+type _AzleResult_3 = variant { Ok : Collector; Err : text };
+type _AzleResult_4 = variant { Ok : vec Collector; Err : text };
+type _AzleResult_5 = variant { Ok : Quote; Err : text };
+type _AzleResult_6 = variant { Ok : vec Quote; Err : text };
+service : () -> {
+  createAuthor : (AuthorPayload) -> (_AzleResult);
+  deleteQuote : (text) -> (_AzleResult_1);
+  getAuthor : (text) -> (_AzleResult) query;
+  getAuthors : () -> (_AzleResult_2) query;
+  getCollector : (text) -> (_AzleResult_3) query;
+  getCollectors : () -> (_AzleResult_4) query;
+  getQuoteById : (text) -> (_AzleResult_5) query;
+  getQuotes : () -> (_AzleResult_6) query;
+  getQuotesByAuthorId : (text) -> (_AzleResult_6) query;
+  getQuotesByAuthorName : (text) -> (_AzleResult_6) query;
+  getQuotesByCollectorId : (text) -> (_AzleResult_6) query;
+  getQuotesByCurrentUser : () -> (_AzleResult_6) query;
+  registerCollector : (CollectorPayload) -> (_AzleResult_3);
+  updateCollector : (text, CollectorPayload) -> (_AzleResult_3);
+  updateQuote : (text, QuotePayload) -> (_AzleResult_5);
+  uploadQuote : (QuotePayload) -> (_AzleResult_5);
+}

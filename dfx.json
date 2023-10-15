@@ -1,0 +1,13 @@
+{
+  "canisters": {
+    "quote_manage": {
+      "main": "src/index.ts",
+      "type": "custom",
+      "build": "npx azle quote_manage",
+      "root": "src",
+      "ts": "src/index.ts",
+      "candid": "src/index.did",
+      "wasm": ".azle/quote_manage/quote_manage.wasm.gz"
+    }
+  }
+}
